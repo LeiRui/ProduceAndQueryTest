@@ -29,7 +29,7 @@ public class Executor2{
         //part 2
         PrintWriter pw=null;
         try {
-            pw = new PrintWriter(new FileOutputStream("exp2_.csv",true)); // append
+            pw = new PrintWriter(new FileOutputStream("exp2_new.csv",true)); // append
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -40,7 +40,7 @@ public class Executor2{
         int rows=cost.insertTable(RNum);
 
         //part 4
-        double [] r1 = new double[]{1,1,1,1, 1, 21,21,21,21,  31,31,31, 40,40,40};
+        double [] r1 = new double[]{1,1,1,1, 1, 21,21,21,21,  31,31,31, 41,41,41};
         double [] r2 = new double[]{10,30,50,70,90, 30,50,70,90, 40,60,80, 50,70,90};
         for(int k=0;k<r1.length;k++) {
             query = new Query(3, 0, r1[k], r2[k], true, true, new double[]{888, 20, 30});
@@ -67,12 +67,13 @@ public class Executor2{
             }
             pw.write(builder.toString());
             double time = cost.QueryTime(); //ms
-            pw.write("" + time + "," + RNum + "," + rows + ",,");
+            //pw.write("" + time + "," + RNum + "," + rows + ",,");
+            pw.write("" + time + "," + RNum + "," + ",,");
             System.out.println(cost.QueryFormula(pw) * RNum);
             pw.write("\n");
         }
 
-        r1 = new double[]{1,1,1,1, 1, 21,21,21,21,  31,31,31, 40,40,40};
+        r1 = new double[]{1,1,1,1, 1, 21,21,21,21,  31,31,31, 41,41,41};
         r2 = new double[]{10,30,50,70,90, 30,50,70,90, 40,60,80, 50,70,90};
         for(int k=0;k<r1.length;k++) {
             query = new Query(3, 1, r1[k], r2[k], true, true, new double[]{20,888, 30});
@@ -100,11 +101,12 @@ public class Executor2{
             pw.write(builder.toString());
             double time = cost.QueryTime(); //ms
             pw.write("" + time + "," + RNum + "," + rows + ",,");
+            //pw.write("" + time + "," + RNum + ","  + ",,");
             System.out.println(cost.QueryFormula(pw) * RNum);
             pw.write("\n");
         }
 
-        r1 = new double[]{1,1,1,1, 1, 21,21,21,21,  31,31,31, 40,40,40};
+        r1 = new double[]{1,1,1,1, 1, 21,21,21,21,  31,31,31, 41,41,41};
         r2 = new double[]{10,30,50,70,90, 30,50,70,90, 40,60,80, 50,70,90};
         for(int k=0;k<r1.length;k++) {
             query = new Query(3, 2, r1[k], r2[k], true, true, new double[]{20, 30,888});
@@ -131,7 +133,8 @@ public class Executor2{
             }
             pw.write(builder.toString());
             double time = cost.QueryTime(); //ms
-            pw.write("" + time + "," + RNum + "," + rows + ",,");
+            //pw.write("" + time + "," + RNum + "," + rows + ",,");
+            pw.write("" + time + "," + RNum + "," + ",,");
             System.out.println(cost.QueryFormula(pw) * RNum);
             pw.write("\n");
         }

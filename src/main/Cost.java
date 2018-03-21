@@ -4,6 +4,7 @@ import basic.Query;
 import basic.RowData;
 import com.datastax.driver.core.*;
 import com.datastax.driver.core.querybuilder.Insert;
+import com.kenai.jffi.Array;
 import distribution.DiscreteUniform;
 import table.DiscreteUniformTable;
 
@@ -78,17 +79,27 @@ public class Cost {
             }
 
             //到这里的pos就是满足range查询范围的
+            //double []ppre = query.CKPoints;
+            //ppre[qi] = pos;
             double []p = query.CKPoints;
             p[qi] = pos;
             if(previous == null) {
-                previous = new RowData(CKn,p);
+                double [] pre=new double[p.length];
+                System.arraycopy(p, 0, pre, 0, p.length);
+                previous = new RowData(CKn, pre);
                 res+=discreteUniformTable.getBefore(previous,pw);
+                //System.out.println("res="+res*64);
                 //System.out.println("res = "+res*rows);
             }
             else {
                 current = new RowData(CKn,p);
+                //System.out.println("previous:"+previous.data[qi]+",current:"+current.data[qi]);
                 res += discreteUniformTable.getBetween(previous,current,qi,pw);
+                //System.out.println("res="+res*64);
                 //System.out.println("res = "+res*rows);
+                double [] pre=new double[p.length];
+                System.arraycopy(p, 0, pre, 0, p.length);
+                previous.data=pre;
             }
         }
         return res;

@@ -49,13 +49,16 @@ public class DiscreteUniformTable extends CKTable {
         }
 
         double h1=h*CKdist.get(qi).getPoint(p1.data[qi]);
+        String tmp = "";
         for(int i=qi+1; i<CKn; i++) {
             double x =  h1*CKdist.get(i).getRightRangeExclude(p1.data[i]);
             res += x;
             h1 *= CKdist.get(i).getPoint(p1.data[i]);
             //pw.write(""+x*rows+",");
-            pw.write(""+x+",");
+            tmp=""+x+","+tmp; // NOTE:here tmp is used for flipping the writing sequence
+
         }
+        pw.write(tmp);
 
         double h2=h*CKdist.get(qi).getPoint(p2.data[qi]);
         for(int i=qi+1; i<CKn; i++) {
